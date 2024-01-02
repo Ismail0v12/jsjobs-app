@@ -9,12 +9,22 @@ import {
 
 import styles from './welcome.style';
 import {COLORS, icons, SIZES} from '../../../constants';
-import {useState} from 'react';
+import {FC, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const jobTypes = ['Full-time', 'Part-time', 'Contract'];
 
-const Welcome = () => {
+interface WelcomeProps {
+  searchTerm: string;
+  setSearchTerm: (searchTerm: string) => void;
+  handleClick: () => void;
+}
+
+const Welcome: FC<WelcomeProps> = ({
+  searchTerm,
+  setSearchTerm,
+  handleClick,
+}) => {
   const [activeJobType, setActiveJobType] = useState('Full-time');
   const {navigate} = useNavigation();
   return (
@@ -30,12 +40,12 @@ const Welcome = () => {
             cursorColor={COLORS.secondary}
             enterKeyHint="search"
             placeholder="What are you looking for?"
-            value=""
-            onChange={() => {}}
+            value={searchTerm}
+            onChangeText={value => setSearchTerm(value)}
             style={styles.searchInput}
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
           <Image
             source={icons.search}
             resizeMode="contain"

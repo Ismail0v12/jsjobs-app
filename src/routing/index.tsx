@@ -3,14 +3,14 @@ import {ScreenHeaderBtn} from '../components';
 import {COLORS, icons, images} from '../constants';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/HomeScreen';
-
-type RootStackParamList = {
-  Home: undefined;
-  Search: {q: string};
-};
+import JobDetails from '../screens/JobDetails';
+import {RootStackParamList} from './types.ts';
+import {useNavigation} from '@react-navigation/native';
+import JobSearch from '../screens/JobSearch';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export const Routing = () => {
+  const navigation = useNavigation();
   return (
     <>
       <Stack.Navigator initialRouteName="Home">
@@ -33,17 +33,43 @@ export const Routing = () => {
         />
         <Stack.Screen
           name="Search"
-          component={Home}
+          component={JobSearch}
           options={{
             headerStyle: {
               backgroundColor: COLORS.lightWhite,
             },
             headerShadowVisible: false,
             headerLeft: () => (
-              <ScreenHeaderBtn width={20} height={20} icon={icons.menu} />
+              <ScreenHeaderBtn
+                width={20}
+                height={20}
+                icon={icons.left}
+                handlePress={() => navigation.goBack()}
+              />
+            ),
+
+            headerTitle: '',
+          }}
+        />
+        <Stack.Screen
+          name="JobDetails"
+          component={JobDetails}
+          options={{
+            headerStyle: {
+              backgroundColor: COLORS.lightWhite,
+            },
+            headerShadowVisible: false,
+            headerBackVisible: false,
+            headerLeft: () => (
+              <ScreenHeaderBtn
+                width={20}
+                height={20}
+                icon={icons.left}
+                handlePress={() => navigation.goBack()}
+              />
             ),
             headerRight: () => (
-              <ScreenHeaderBtn width={50} height={50} icon={images.profile} />
+              <ScreenHeaderBtn width={20} height={20} icon={icons.share} />
             ),
             headerTitle: '',
           }}

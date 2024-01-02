@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
     marginTop: SIZES.medium,
     gap: SIZES.small,
   },
+  errorText: {
+    fontFamily: FONT.medium,
+    color: COLORS.tomato,
+    fontSize: SIZES.large,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

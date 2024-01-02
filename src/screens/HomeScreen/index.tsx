@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import {COLORS, SIZES} from '../../constants';
 import {Nearbyjobs, Popularjobs, Welcome} from '../../components';
-import {useFetch} from '../../hooks/useFetch.ts';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
-  const {error, isLoading, data} = useFetch();
-  console.log(data);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigation = useNavigation();
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -18,7 +18,15 @@ const Home = () => {
           flex: 1,
           padding: SIZES.medium,
         }}>
-        <Welcome />
+        <Welcome
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleClick={() => {
+            if (searchTerm.length > 3) {
+              navigation.navigate('Search', {q: searchTerm});
+            }
+          }}
+        />
         <Popularjobs />
         <Nearbyjobs />
       </View>
