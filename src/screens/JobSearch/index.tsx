@@ -15,11 +15,12 @@ import {COLORS, icons, SIZES} from '../../constants';
 import styles from '../../styles/search';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {IDaum} from '../../types';
+import {rapidApiKey} from '../../hooks/useFetch.ts';
 
 const JobSearch = () => {
   const params = useRoute();
   // @ts-ignore
-  const query = params.params.query;
+  const query = params.params.q;
   const router = useNavigation();
 
   const [searchResult, setSearchResult] = useState<IDaum[]>([]);
@@ -36,7 +37,7 @@ const JobSearch = () => {
         method: 'GET',
         url: 'https://jsearch.p.rapidapi.com/search',
         headers: {
-          'X-RapidAPI-Key': '',
+          'X-RapidAPI-Key': rapidApiKey,
           'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
         },
         params: {
@@ -86,7 +87,7 @@ const JobSearch = () => {
         ListHeaderComponent={() => (
           <>
             <View style={styles.container}>
-              <Text style={styles.searchTitle}>{params.id}</Text>
+              <Text style={styles.searchTitle}>{query}</Text>
               <Text style={styles.noOfSearchedJobs}>Job Opportunities</Text>
             </View>
             <View style={styles.loaderContainer}>

@@ -2,6 +2,7 @@ export type RootStackParamList = {
   Home: undefined;
   Search: {q: string};
   JobDetails: {id: string};
+  Login: undefined;
 };
 
 declare global {

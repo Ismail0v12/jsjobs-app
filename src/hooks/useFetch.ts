@@ -4,7 +4,7 @@ import {Alert} from 'react-native';
 import Config from 'react-native-config';
 import {IBase} from '../types';
 
-const rapidApiKey =
+export const rapidApiKey =
   Config.RAPID_API_KEY ?? '972cd51b53mshb15833c78b7b7dap11b49ajsnf3ce0474647b';
 
 export function useFetch<T>(endpoint: string, query?: Record<string, any>) {
